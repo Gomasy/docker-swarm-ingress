@@ -82,7 +82,7 @@ http {
     proxy_set_header Host $http_host;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection $proxy_connection;
-    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Real-IP $http_x_forwarded_for;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $proxy_x_forwarded_proto;
     proxy_set_header X-Forwarded-Ssl $proxy_x_forwarded_ssl;
@@ -100,9 +100,15 @@ http {
         server_name _;
         access_log off;
 
-        location / {
+        error_page 422 /index.html;
+
+        location = /index.html {
             root /usr/share/nginx/html;
-            index index.html;
+            internal;
+        }
+
+        location / {
+            return 422;
         }
     }
     
@@ -123,9 +129,15 @@ http {
         include /etc/nginx/options-ssl-nginx.conf;
         ssl_dhparam /etc/nginx/ssl-dhparams.pem;
 
-        location / {
+        error_page 422 /index.html;
+
+        location = /index.html {
             root /usr/share/nginx/html;
-            index index.html;
+            internal;
+        }
+
+        location / {
+            return 422;
         }
     }
     {% endif %}
