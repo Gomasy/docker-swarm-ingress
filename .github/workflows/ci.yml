@@ -35,11 +35,11 @@ jobs:
       run: docker ps -a
     - name: Testing connection to nginx
       run: docker-compose -f .docker-compose.yml-ci exec -T nginx curl --retry 10 --retry-connrefused -I http://localhost
-    - uses: anchore/scan-action@v2
+    - uses: anchore/scan-action@v3
       id: scan
       with:
         image: "docker-swarm-ingress:latest"
-        acs-report-enable: true
+        fail-build: false
     - name: upload Anchore scan SARIF report
       uses: github/codeql-action/upload-sarif@v3
       with:
