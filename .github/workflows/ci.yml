@@ -11,7 +11,7 @@ on:
 
 env:
   IMAGE_NAME: docker-swarm-ingress
-  NGINX_VERSION: 1.21.6-alpine
+  NGINX_VERSION: 1.24.0-alpine
 
 jobs:
 
