@@ -100,7 +100,7 @@ http {
         server_name _;
         access_log off;
 
-        error_page 422 /index.html;
+        error_page 400 /index.html;
 
         location = /index.html {
             root /usr/share/nginx/html;
@@ -108,7 +108,7 @@ http {
         }
 
         location / {
-            return 422;
+            return 400;
         }
     }
     
@@ -129,7 +129,7 @@ http {
         include /etc/nginx/options-ssl-nginx.conf;
         ssl_dhparam /etc/nginx/ssl-dhparams.pem;
 
-        error_page 422 /index.html;
+        error_page 400 /index.html;
 
         location = /index.html {
             root /usr/share/nginx/html;
@@ -137,7 +137,7 @@ http {
         }
 
         location / {
-            return 422;
+            return 400;
         }
     }
     {% endif %}
