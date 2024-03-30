@@ -28,9 +28,8 @@ jobs:
     - name: Bringup the environment
       run: docker-compose -f .docker-compose.yml-ci up -d
     - name: Sleep for 30 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '30s'
+      run: sleep 30s
+      shell: bash
     - name: List all containers
       run: docker ps -a
     - name: Testing connection to nginx
