@@ -30,7 +30,7 @@ def resolve_pattern(format):
 "message": "$request [Status: $status]", \
 "format": "access", \
 "request": { \
-  "clientip": "$http_x_forwarded_for", \
+  "clientip": "$http_x_real_ip", \
   "duration": $request_time, \
   "status": $status, \
   "request": "$request", \
@@ -48,7 +48,7 @@ def resolve_pattern(format):
     elif format == 'custom':
         return os.environ['LOG_CUSTOM']
     else:
-        return '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$http_x_forwarded_for" "$request_id"'
+        return '$http_x_real_ip - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$request_id"'
 
 nginx_config_template_path = '/ingress/nginx.tpl'
 nginx_config_path = '/etc/nginx/nginx.conf'
