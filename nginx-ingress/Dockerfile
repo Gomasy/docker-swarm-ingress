@@ -1,6 +1,10 @@
 FROM nginx:1.26.0-alpine
 
 RUN apk add --update --no-cache python3 curl bash openssl && ln -sf python3 /usr/bin/python
+
+# Temporarily ignore externally-managed-environment errors
+RUN rm /usr/lib/python3.11/EXTERNALLY-MANAGED
+
 RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
 COPY requirements.txt ./
